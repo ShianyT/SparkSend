@@ -60,6 +60,13 @@
                 <version>4.9.2</version>
             </dependency>
 
+            <!-- 腾讯SDK -->
+            <dependency>
+                <groupId>com.tencentcloudapi</groupId>
+                <artifactId>tencentcloud-sdk-java</artifactId>
+                <version>3.1.510</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
