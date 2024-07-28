@@ -1,6 +1,6 @@
-package com.SparkSend.support.dao;
+package com.TT.SparkSend.support.dao;
 
-import com.SparkSend.support.domain.MessageTemplate;
+import com.TT.SparkSend.support.domain.MessageTemplate;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

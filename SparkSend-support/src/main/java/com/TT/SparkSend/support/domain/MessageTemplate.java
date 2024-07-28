@@ -1,4 +1,4 @@
-package com.SparkSend.support.domain;
+package com.TT.SparkSend.support.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

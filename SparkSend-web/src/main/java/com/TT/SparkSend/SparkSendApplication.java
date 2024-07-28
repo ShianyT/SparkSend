@@ -1,4 +1,4 @@
-package com.SparkSend;
+package com.TT.SparkSend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

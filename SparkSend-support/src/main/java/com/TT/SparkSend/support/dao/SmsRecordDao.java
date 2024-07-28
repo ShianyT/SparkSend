@@ -1,9 +1,8 @@
-package com.SparkSend.support.dao;
+package com.TT.SparkSend.support.dao;
 
-import com.SparkSend.support.domain.SmsRecord;
+import com.TT.SparkSend.support.domain.SmsRecord;
 import org.springframework.data.repository.CrudRepository;
 
-import javax.sound.midi.ShortMessage;
 import java.util.List;
 
 /**
