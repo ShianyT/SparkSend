@@ -8,6 +8,7 @@ import com.TT.SparkSend.service.api.domain.MessageParam;
 import com.TT.SparkSend.service.api.impl.domain.SendTaskModel;
 import com.TT.SparkSend.support.pipeline.BusinessProcess;
 import com.TT.SparkSend.support.pipeline.ProcessContext;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,6 +18,7 @@ import java.util.Objects;
  * @Author TT
  * @Date 2024/7/28
  */
+@Service
 public class SendPreCheckAction implements BusinessProcess<SendTaskModel> {
 
 
