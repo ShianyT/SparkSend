@@ -6,8 +6,8 @@ import com.TT.SparkSend.common.enums.RespStatusEnum;
 import com.TT.SparkSend.common.vo.BasicResultVO;
 import com.TT.SparkSend.service.api.domain.MessageParam;
 import com.TT.SparkSend.service.api.impl.domain.SendTaskModel;
-import com.TT.SparkSend.support.pipeline.BusinessProcess;
-import com.TT.SparkSend.support.pipeline.ProcessContext;
+import com.TT.SparkSend.common.pipeline.BusinessProcess;
+import com.TT.SparkSend.common.pipeline.ProcessContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

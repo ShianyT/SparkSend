@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="SparkSend-cron" />
+        <module name="SparkSend-web" />
+        <module name="SparkSend-common" />
+        <module name="SparkSend-service-api" />
+        <module name="SparkSend-support" />
+        <module name="SparkSend-service-api-impl" />
+        <module name="SparkSend-handler" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="SparkSend-common" options="-parameters" />
+      <module name="SparkSend-cron" options="-parameters" />
+      <module name="SparkSend-handler" options="-parameters" />
+      <module name="SparkSend-service-api" options="-parameters" />
+      <module name="SparkSend-service-api-impl" options="-parameters" />
+      <module name="SparkSend-support" options="-parameters" />
+      <module name="SparkSend-web" options="-parameters" />
+    </option>
+  </component>
+</project>

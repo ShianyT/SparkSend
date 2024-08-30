@@ -54,8 +54,4 @@ public class TencentSmsScript {
             log.error(e.toString());
         }
     }
-
-    public static void main(String[] args) {
-        send("18344132023","1234","-", "-", "");
-    }
 }

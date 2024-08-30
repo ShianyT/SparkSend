@@ -1,10 +1,9 @@
-package com.TT.SparkSend.support.pipeline;
+package com.TT.SparkSend.common.pipeline;
 
 import com.TT.SparkSend.common.enums.RespStatusEnum;
 import com.TT.SparkSend.common.vo.BasicResultVO;
-import com.TT.SparkSend.support.exception.ProcessException;
+
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,6 @@ import java.util.Objects;
  * @Date 2024/7/28
  */
 @Data
-@Slf4j
 public class ProcessController {
 
     /**

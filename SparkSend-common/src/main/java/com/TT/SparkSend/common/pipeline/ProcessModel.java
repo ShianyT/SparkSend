@@ -1,4 +1,4 @@
-package com.TT.SparkSend.support.pipeline;
+package com.TT.SparkSend.common.pipeline;
 
 /**
  * @Description 真正存储着责任链的数据

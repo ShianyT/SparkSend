@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  mysql:
+    #指定镜像名称或镜像ID
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    #暴露端口 格式：宿主机端口:容器端口 （也可以仅指定容器的端口，宿主机器将会随机分配端口）
+    ports:
+      - "3306:3306"
+    #设置卷挂载的路径  格式：主机路径:容器路径:访问模式 （访问模式可选：ro只读）
+    volumes:
+      - "mysql-data:var/lib/mysql"
+    #设置环境变量
+    environment:
+      MYSQL_ROOT_PASSWORD: 666666
+      #时区
+      TZ: Asia/Shanghai
+    #覆盖容器启动后默认执行的命令
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+volumes:
+  mysql-data:

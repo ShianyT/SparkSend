@@ -3,7 +3,7 @@ package com.TT.SparkSend.service.api.impl.domain;
 import com.TT.SparkSend.common.domain.TaskInfo;
 import com.TT.SparkSend.service.api.domain.MessageParam;
 import com.TT.SparkSend.support.domain.MessageTemplate;
-import com.TT.SparkSend.support.pipeline.ProcessModel;
+import com.TT.SparkSend.common.pipeline.ProcessModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

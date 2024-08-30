@@ -6,9 +6,9 @@ import com.TT.SparkSend.service.api.domain.SendRequest;
 import com.TT.SparkSend.service.api.domain.SendResponse;
 import com.TT.SparkSend.service.api.impl.domain.SendTaskModel;
 import com.TT.SparkSend.service.api.service.SendService;
-import com.TT.SparkSend.support.pipeline.ProcessContext;
-import com.TT.SparkSend.support.pipeline.ProcessController;
-import com.TT.SparkSend.support.pipeline.ProcessModel;
+import com.TT.SparkSend.common.pipeline.ProcessContext;
+import com.TT.SparkSend.common.pipeline.ProcessController;
+import com.TT.SparkSend.common.pipeline.ProcessModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

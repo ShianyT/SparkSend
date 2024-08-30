@@ -1,0 +1,66 @@
+services:
+  sparksend-mysql:
+    image: mysql:5.7
+    container_name: sparksend-mysql
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'   #允许密码为空
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: "666666"   #root用户密码
+      TZ: Asia/Shanghai   #设置容器时区，也可以通过挂载方式同步宿主机时区和时间
+    hostname: mysql
+    volumes:
+      - ./doc/sql:/docker-entrypoint-initdb.d
+      - ./doc/docker/mysql/mysql.cnf:/etc/mysql/my.cnf
+    ports:
+      - "3306:3306"
+    networks:
+      - app
+  sparksend-zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: sparksend-zookeeper
+    volumes:
+      - "/etc/localtime:/etc/localtime"   #同步宿主机的时区以及时间
+    ports:
+      - "2181:2181"
+    networks:
+      - app
+  sparksend-kafka:
+    image: wurstmeister/kafka
+    container_name: sparksend-kafka
+    volumes:
+      - "/etc/localtime:/etc/localtime"
+    environment:
+      KAFKA_BROKER_ID: 0
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://sparksend-kafka:9092    #格式： listener_name://host_name:port
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092   #格式： listener_name://host_name:port
+      KAFKA_ZOOKEEPER_CONNECT: sparksend-zookeeper:2181
+      #格式： topic_name:replication-factor:partitions
+      KAFKA_CREATE_TOPICS: "sparksendBusiness:2:1,sparksendRecall:1:1,austinTraceLog:1:1"
+      KAFKA_HEAP_OPTS: -Xmx512M -Xms256M
+    ports:
+      - "9092:9092"
+    depends_on:
+      - sparksend-zookeeper
+    networks:
+      - app
+  sparksend:
+    build:
+      context: ./
+    ports:
+      - "8080:8080"
+    restart: always
+    container_name: sparksend
+    environment:
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=Asia/Shanghai
+      - TZ=Asia/Shanghai
+    depends_on:
+      - sparksend-mysql
+      - sparksend-zookeeper
+      - sparksend-kafka
+    networks:
+      - app
+networks:
+  app:
+

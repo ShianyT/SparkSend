@@ -1,7 +1,7 @@
 package com.TT.SparkSend.common.domain;
 
 import com.TT.SparkSend.common.dto.model.ContentModel;
-import com.TT.SparkSend.support.pipeline.ProcessModel;
+import com.TT.SparkSend.common.pipeline.ProcessModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

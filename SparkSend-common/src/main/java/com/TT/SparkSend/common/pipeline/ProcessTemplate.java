@@ -1,4 +1,4 @@
-package com.TT.SparkSend.support.pipeline;
+package com.TT.SparkSend.common.pipeline;
 
 import lombok.Data;
 

@@ -4,13 +4,12 @@ import com.TT.SparkSend.service.api.enums.BusinessCode;
 import com.TT.SparkSend.service.api.impl.action.SendAfterCheckAction;
 import com.TT.SparkSend.service.api.impl.action.SendAssembleAction;
 import com.TT.SparkSend.service.api.impl.action.SendPreCheckAction;
-import com.TT.SparkSend.support.pipeline.ProcessController;
-import com.TT.SparkSend.support.pipeline.ProcessTemplate;
+import com.TT.SparkSend.common.pipeline.ProcessController;
+import com.TT.SparkSend.common.pipeline.ProcessTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
