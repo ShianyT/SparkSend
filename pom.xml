@@ -6,8 +6,7 @@
     <groupId>org.example</groupId>
     <artifactId>SparkSend</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
-
+    <version>${revision}</version>
 
     <modules>
         <module>SparkSend-common</module>
@@ -27,52 +26,110 @@
     </parent>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+
+        <!--项目版本-->
+        <revision>1.0-SNAPSHOT</revision>
+
+        <!--构建配置-->
+        <project.maven.compiler.source>17</project.maven.compiler.source>
+        <project.maven.compiler.target>17</project.maven.compiler.target>
+        <maven.compiler.source>${project.maven.compiler.source}</maven.compiler.source>
+        <maven.compiler.target>${project.maven.compiler.target}</maven.compiler.target>
+
+        <!--依赖库版本-->
+        <hutool-all.version>5.7.15</hutool-all.version>
+        <guava.version>31.0.1-jre</guava.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <okhttp.version>4.9.2</okhttp.version>
+        <tencentcloud-sdk-java.version>3.1.510</tencentcloud-sdk-java.version>
+        <mysql-connector-java.version>5.1.35</mysql-connector-java.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!--本地依赖-->
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>SparkSend-common</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>SparkSend-cron</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>SparkSend-handler</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>SparkSend-handler</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>SparkSend-service-api</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>SparkSend-service-api-impl</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>SparkSend-support</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>SparkSend-web</artifactId>
+                <version>${version}</version>
+            </dependency>
+
+            <!--其他依赖包-->
             <!-- hutool -->
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
-                <version>5.7.15</version>
+                <version>${hutool-all.version}</version>
             </dependency>
 
             <!-- guava -->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>31.0.1-jre</version>
+                <version>${guava.version}</version>
             </dependency>
 
             <!-- fastjson -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>1.2.83</version>
+                <version>${fastjson.version}</version>
             </dependency>
 
             <!-- okhttp -->
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
-                <version>4.9.2</version>
+                <version>${okhttp.version}</version>
             </dependency>
 
             <!-- 腾讯SDK -->
             <dependency>
                 <groupId>com.tencentcloudapi</groupId>
                 <artifactId>tencentcloud-sdk-java</artifactId>
-                <version>3.1.510</version>
+                <version>${tencentcloud-sdk-java.version}</version>
             </dependency>
 
             <!-- mysql驱动包 -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.35</version>
+                <version>${mysql-connector-java.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
