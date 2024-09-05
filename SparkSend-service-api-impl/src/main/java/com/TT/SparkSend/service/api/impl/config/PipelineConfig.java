@@ -3,9 +3,11 @@ package com.TT.SparkSend.service.api.impl.config;
 import com.TT.SparkSend.service.api.enums.BusinessCode;
 import com.TT.SparkSend.service.api.impl.action.SendAfterCheckAction;
 import com.TT.SparkSend.service.api.impl.action.SendAssembleAction;
+import com.TT.SparkSend.service.api.impl.action.SendMqAction;
 import com.TT.SparkSend.service.api.impl.action.SendPreCheckAction;
 import com.TT.SparkSend.common.pipeline.ProcessController;
 import com.TT.SparkSend.common.pipeline.ProcessTemplate;
+import com.TT.SparkSend.support.mq.SendMqService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +25,8 @@ public class PipelineConfig {
     private SendAssembleAction sendAssembleAction;
     @Autowired
     private SendAfterCheckAction sendAfterCheckAction;
+    @Autowired
+    private SendMqAction sendMqAction;
 
     /**
      * 普通发送执行流程
@@ -35,7 +39,7 @@ public class PipelineConfig {
     @Bean("commonSendTemplate")
     public ProcessTemplate commonSendTemplate() {
         ProcessTemplate processTemplate = new ProcessTemplate();
-        processTemplate.setProcessList(Arrays.asList(sendPreCheckAction, sendAssembleAction, sendAfterCheckAction));
+        processTemplate.setProcessList(Arrays.asList(sendPreCheckAction, sendAssembleAction, sendAfterCheckAction,sendMqAction));
         return processTemplate;
     }
 

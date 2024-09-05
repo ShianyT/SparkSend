@@ -40,6 +40,7 @@ public class ConsumeServiceImpl implements ConsumeService {
                     .builder().bizId(taskInfo.getBizId()).messageId(taskInfo.getMessageId()).ids(taskInfo.getReceiver())
                     .businessId(taskInfo.getBusinessId()).state(AnchorState.RECEIVE.getCode()).build());
 
+
         }
     }
 

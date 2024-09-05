@@ -7,7 +7,6 @@ import com.TT.SparkSend.handler.receiver.MessageReceiver;
 import com.TT.SparkSend.handler.service.ConsumeService;
 import com.TT.SparkSend.handler.utils.GroupIdMappingUtils;
 import com.alibaba.fastjson.JSON;
-import lombok.extern.apachecommons.CommonsLog;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
