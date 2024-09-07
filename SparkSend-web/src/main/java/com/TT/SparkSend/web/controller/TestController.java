@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,9 @@ import java.util.List;
 public class TestController {
     @Autowired
     private MessageTemplateDao messageTemplateDao;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @RequestMapping("/test")
     private String testLog(){
@@ -29,9 +33,11 @@ public class TestController {
         return JSON.toJSONString(list);
     }
 
-//    @RequestMapping("/testSend")
-//    private String testSend(){
-//
-//    }
+   @RequestMapping("/testRedis")
+   private String testRedis(){
+        stringRedisTemplate.opsForValue().set("test","TT");
+        return stringRedisTemplate.opsForValue().get("test");
+
+   }
 
 }

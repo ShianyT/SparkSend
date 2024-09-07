@@ -4,6 +4,7 @@ import com.TT.SparkSend.common.domain.TaskInfo;
 import com.TT.SparkSend.common.pipeline.BusinessProcess;
 import com.TT.SparkSend.common.pipeline.ProcessContext;
 import com.TT.SparkSend.support.utils.LogUtils;
+import com.TT.SparkSend.support.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,8 @@ public class ShieldAction implements BusinessProcess<TaskInfo> {
 
     @Override
     public void process(ProcessContext<TaskInfo> context) {
-        // TODO
+        TaskInfo taskInfo = context.getProcessModel();
+
+        if(S)
     }
 }

@@ -16,6 +16,18 @@ services:
       - "3306:3306"
     networks:
       - app
+  sparksend-redis:
+    image: redis:3.2
+    ports:
+      - "6379:6379"
+    restart: always
+    container_name: sparksend-redis
+    volumes:
+      - ./doc/docker/redis/redis.conf:/usr/local/etc/redis/redis.conf:rw
+    command:
+      /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
+    networks:
+      - app
   sparksend-zookeeper:
     image: wurstmeister/zookeeper
     container_name: sparksend-zookeeper

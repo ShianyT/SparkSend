@@ -6,12 +6,14 @@ import com.TT.SparkSend.common.domain.LogParam;
 import com.TT.SparkSend.common.domain.RecallTaskInfo;
 import com.TT.SparkSend.common.domain.TaskInfo;
 import com.TT.SparkSend.common.enums.AnchorState;
+import com.TT.SparkSend.handler.pending.Task;
+import com.TT.SparkSend.handler.pending.TaskPendingHolder;
 import com.TT.SparkSend.handler.service.ConsumeService;
 import com.TT.SparkSend.handler.utils.GroupIdMappingUtils;
 import com.TT.SparkSend.support.utils.LogUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +31,9 @@ public class ConsumeServiceImpl implements ConsumeService {
     private ApplicationContext context;
 
     @Autowired
+    private TaskPendingHolder taskPendingHolder;
+
+    @Autowired
     private LogUtils logUtils;
 
 
@@ -39,8 +44,8 @@ public class ConsumeServiceImpl implements ConsumeService {
             logUtils.print(LogParam.builder().bizType(taskInfo.getBizId()).object(taskInfo).build(), AnchorInfo
                     .builder().bizId(taskInfo.getBizId()).messageId(taskInfo.getMessageId()).ids(taskInfo.getReceiver())
                     .businessId(taskInfo.getBusinessId()).state(AnchorState.RECEIVE.getCode()).build());
-
-
+            Task task = context.getBean(Task.class).setTaskInfo(taskInfo);
+            taskPendingHolder.route(topicGroupId).execute(task);
         }
     }
 
