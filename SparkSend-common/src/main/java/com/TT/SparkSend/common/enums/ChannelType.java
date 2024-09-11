@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * @Description
+ * @Description 发送渠道类型枚举
  * @Author TT
  * @Date 2024/8/29
  */

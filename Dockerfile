@@ -10,4 +10,4 @@ WORKDIR /build
 ADD ./SparkSend-web/target/SparkSend-web-1.0-SNAPSHOT.jar ./SparkSend.jar
 
 # 运行jar包
-ENTRYPOINT ["sh","-c","java -jar $JAVA_OPTS austin.jar $PARAMS"]
+ENTRYPOINT ["sh","-c","java -jar $JAVA_OPTS SparkSend.jar $PARAMS"]

@@ -9,13 +9,14 @@ services:
       MYSQL_ROOT_PASSWORD: "666666"   #root用户密码
       TZ: Asia/Shanghai   #设置容器时区，也可以通过挂载方式同步宿主机时区和时间
     hostname: mysql
+    ports:
+      - "3306:3306"
     volumes:
       - ./doc/sql:/docker-entrypoint-initdb.d
       - ./doc/docker/mysql/mysql.cnf:/etc/mysql/my.cnf
-    ports:
-      - "3306:3306"
     networks:
       - app
+
   sparksend-redis:
     image: redis:3.2
     ports:
@@ -48,7 +49,7 @@ services:
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092   #格式： listener_name://host_name:port
       KAFKA_ZOOKEEPER_CONNECT: sparksend-zookeeper:2181
       #格式： topic_name:replication-factor:partitions
-      KAFKA_CREATE_TOPICS: "sparksendBusiness:2:1,sparksendRecall:1:1,austinTraceLog:1:1"
+      KAFKA_CREATE_TOPICS: "sparksendBusiness:2:1,sparksendRecall:1:1,sparksendTraceLog:1:1"
       KAFKA_HEAP_OPTS: -Xmx512M -Xms256M
     ports:
       - "9092:9092"
@@ -71,6 +72,8 @@ services:
       - sparksend-mysql
       - sparksend-zookeeper
       - sparksend-kafka
+      - sparksend-apollo
+      - sparksend-redis
     networks:
       - app
 networks:
