@@ -45,6 +45,8 @@
         <mysql-connector-java.version>5.1.35</mysql-connector-java.version>
         <log-record-starter.version>1.0.4.1</log-record-starter.version>
         <dynamic-tp-spring-boot-starter-apollo.version>1.0.2</dynamic-tp-spring-boot-starter-apollo.version>
+        <javax.mail.version>1.6.2</javax.mail.version>
+        <xxl-job-core.version>2.3.0</xxl-job-core.version>
     </properties>
 
     <dependencyManagement>
@@ -141,11 +143,27 @@
                 <version>${log-record-starter.version}</version>
             </dependency>
 
+            <!--分布式配置中心Apollo-->
             <dependency>
                 <groupId>io.github.lyh200</groupId>
                 <artifactId>dynamic-tp-spring-boot-starter-apollo</artifactId>
                 <version>${dynamic-tp-spring-boot-starter-apollo.version}</version>
             </dependency>
+
+            <!--邮件发送-->
+            <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>${javax.mail.version}</version>
+            </dependency>
+
+            <!--xxl-job分布式定时任务-->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job-core.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
