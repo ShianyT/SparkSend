@@ -3,11 +3,15 @@ package com.TT.SparkSend.handler.handler;
 import com.TT.SparkSend.common.domain.AnchorInfo;
 import com.TT.SparkSend.common.domain.TaskInfo;
 import com.TT.SparkSend.common.enums.AnchorState;
+import com.TT.SparkSend.handler.flowcontrol.FlowControlFactory;
+import com.TT.SparkSend.handler.flowcontrol.FlowControlParam;
 import com.TT.SparkSend.support.utils.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import javax.annotation.PostConstruct;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Description 发送各个渠道的handler
@@ -23,14 +27,15 @@ public abstract class BaseHandler implements Handler{
 
     /**
      * 限流相关的参数
+     * 子类初始化的时候指定
      */
-
+    protected FlowControlParam flowControlParam;
     @Autowired
     private HandlerHolder handlerHolder;
-
     @Autowired
     private LogUtils logUtils;
-
+    @Autowired
+    private FlowControlFactory flowControlFactory;
     @Autowired
     private StringRedisTemplate redisTemplate;
 
@@ -44,7 +49,9 @@ public abstract class BaseHandler implements Handler{
 
     @Override
     public void doHandler(TaskInfo taskInfo) {
-        // TODO
+        if (Objects.nonNull(flowControlParam)) {
+            flowControlFactory.flowControl(taskInfo,flowControlParam);
+        }
         if (handler(taskInfo)) {
             logUtils.print(AnchorInfo.builder().state(AnchorState.SEND_SUCCESS.getCode()).bizId(taskInfo.getBizId())
                     .messageId(taskInfo.getMessageId()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver())
@@ -61,4 +68,20 @@ public abstract class BaseHandler implements Handler{
      * 统一处理的handler接口
      */
     public abstract boolean handler(TaskInfo taskInfo);
+
+    /**
+     * 将撤回的消息存储到redis
+     *
+     * @param prefix            redis前缀
+     * @param messageTemplateId 消息模板id
+     * @param taskId            消息下发taskId
+     * @param expireTime        存储到redis的有效时间（跟对应渠道可撤回多久的消息有关系)
+     */
+    protected void saveRecallInfo(String prefix, Long messageTemplateId, String taskId, Long expireTime) {
+        redisTemplate.opsForList().leftPush(prefix + messageTemplateId, taskId);
+        redisTemplate.opsForValue().set(prefix + taskId, taskId);
+        redisTemplate.expire(prefix + messageTemplateId, expireTime, TimeUnit.SECONDS);
+        redisTemplate.expire(prefix + taskId, expireTime, TimeUnit.SECONDS);
+    }
+
 }

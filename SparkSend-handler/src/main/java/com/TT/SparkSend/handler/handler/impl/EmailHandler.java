@@ -9,10 +9,13 @@ import com.TT.SparkSend.common.domain.RecallTaskInfo;
 import com.TT.SparkSend.common.domain.TaskInfo;
 import com.TT.SparkSend.common.dto.model.EmailContentModel;
 import com.TT.SparkSend.common.enums.ChannelType;
+import com.TT.SparkSend.handler.enums.RateLimitStrategy;
+import com.TT.SparkSend.handler.flowcontrol.FlowControlParam;
 import com.TT.SparkSend.handler.handler.BaseHandler;
 import com.TT.SparkSend.support.utils.AccountUtils;
 import com.TT.SparkSend.support.utils.SparkSendFileUtils;
 import com.google.common.base.Throwables;
+import com.google.common.util.concurrent.RateLimiter;
 import com.sun.mail.util.MailSSLSocketFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +42,13 @@ public class EmailHandler extends BaseHandler {
 
     public EmailHandler() {
         channelCode = ChannelType.EMAIL.getCode();
-        // TODO 限流操作
+
+        // 按照请求限流，默认单机 3 qps （可以在apollo动态调整参数)
+        Double rateInitValue = Double.valueOf(3);
+        flowControlParam = FlowControlParam.builder()
+                .rateInitValue(rateInitValue)
+                .rateLimitStrategy(RateLimitStrategy.REQUEST_RATE_LIMIT)
+                .rateLimiter(RateLimiter.create(rateInitValue)).build();
     }
 
     @Override
@@ -61,6 +70,9 @@ public class EmailHandler extends BaseHandler {
         return true;
     }
 
+    /**
+     * 获取账号信息和配置
+     */
     private MailAccount getAccountConfig(Integer sendAccount) {
         MailAccount account = accountUtils.getAccountById(sendAccount, MailAccount.class);
         try {
@@ -76,11 +88,10 @@ public class EmailHandler extends BaseHandler {
     }
 
     /**
-     * 邮箱 api 不支持撤回消息
+     * 邮箱api不支持撤回消息
      */
     @Override
     public void recall(RecallTaskInfo recallTaskInfo) {
-
     }
 
 
