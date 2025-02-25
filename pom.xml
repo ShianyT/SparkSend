@@ -16,6 +16,7 @@
         <module>SparkSend-web</module>
         <module>SparkSend-cron</module>
         <module>SparkSend-support</module>
+        <module>SparkSend-stream</module>
     </modules>
 
     <parent>
@@ -47,6 +48,10 @@
         <dynamic-tp-spring-boot-starter-apollo.version>1.0.2</dynamic-tp-spring-boot-starter-apollo.version>
         <javax.mail.version>1.6.2</javax.mail.version>
         <xxl-job-core.version>2.3.0</xxl-job-core.version>
+        <flink.version>1.14.3</flink.version>
+        <scala.binary.version>2.11</scala.binary.version>
+        <flink-connector-hive_2.12.version>1.16.0</flink-connector-hive_2.12.version>
+        <flink-table-api-java-bridge.version>1.16.0</flink-table-api-java-bridge.version>
     </properties>
 
     <dependencyManagement>

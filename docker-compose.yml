@@ -67,6 +67,23 @@ services:
       - app
     depends_on:
       - sparksend-mysql
+  taskmanager:
+    image: flink:1.16.1
+    depends_on:
+      - jobmanager
+      - austin-zookeeper
+      - austin-kafka
+    command: taskmanager
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 2
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=Asia/Shanghai
+      - TZ=Asia/Shanghai
+    networks:
+      - app
   sparksend:
     build:
       context: ./
